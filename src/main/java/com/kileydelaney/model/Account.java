@@ -72,7 +72,7 @@ public class Account {
 
 
     // method to parse input JSON as Account objects
-    public List<Account> parseJSON(URL jsonURL) throws IOException {
+    public static List<Account> parseJSON(URL jsonURL) throws IOException {
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
