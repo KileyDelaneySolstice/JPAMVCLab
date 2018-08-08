@@ -98,28 +98,4 @@ public class Address {
         }
     }
 
-
-
-    // main method for testing
-    // TODO: delete before demo
-    public static void main(String[] args) {
-        Address addr1 = new Address();
-        addr1.setStreet("Linden Avenue");
-        addr1.setAptBuilding(703);
-        addr1.setCity("Oak Park");
-        addr1.setStateProvince("IL");
-        addr1.setZipPostal("60302");
-        addr1.setCountry("United States");
-
-        Address addr2 = new Address();
-        addr2.setStreet("Groene Zoom");
-        addr2.setAptBuilding(64);
-        addr2.setCity("Ten Boer");
-        addr2.setZipPostal("9791 BD");
-        addr2.setCountry("The Netherlands");
-
-        System.out.println(addr1.toString());
-        System.out.println(addr2.toString());
-    }
-
 }

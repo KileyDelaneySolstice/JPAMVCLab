@@ -42,6 +42,8 @@ public class Account {
 
 
     // getters
+    public Long getId() { return id; }
+
     public String getFirstName() { return firstName; }
 
     public String getLastName() { return lastName; }
@@ -62,9 +64,9 @@ public class Account {
 
     // toString method(s) for printing/testing
     public String toString() {
-        return "Information for Amazon account with ID " + id + ": first name =  " +
+        return "Data for Amazon account with ID " + id + ": first name =  " +
                 firstName + "; last name = " + lastName + "; email address = " +
-                email + "; address = " + address.toString() + ".";
+                email + "; address = " + address.toString();
 
     }
 
@@ -82,25 +84,4 @@ public class Account {
         }
     }
 
-
-    // main method for testing
-    // TODO: delete before demo
-    public static void main(String[] args) {
-        Address addr = new Address();
-        addr.setStreet("Linden Avenue");
-        addr.setAptBuilding(703);
-        addr.setCity("Oak Park");
-        addr.setStateProvince("IL");
-        addr.setZipPostal("60302");
-        addr.setCountry("United States");
-
-        Account acct = new Account();
-        acct.setFirstName("Kiley");
-        acct.setLastName("Delaney");
-        acct.setEmail("kdelaney@solstice.com");
-        acct.setAddress(addr);
-
-        System.out.println(acct.toString());
-
-    }
 }
