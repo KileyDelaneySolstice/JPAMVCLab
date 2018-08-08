@@ -23,7 +23,7 @@ import java.util.Arrays;
 @Table(name = "amazon")
 public class Account {
 
-    // column declarations
+    // attribute declarations
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -41,7 +41,7 @@ public class Account {
     private Address address;
 
 
-    // getters and setters
+    // getters
     public String getFirstName() { return firstName; }
 
     public String getLastName() { return lastName; }
@@ -50,12 +50,21 @@ public class Account {
 
     public Address getAddress() { return address; }
 
+    // setters
+    public void setFirstName(String firstName) { this.firstName = firstName; }
 
-    // toString for printing/testing
+    public void setLastName(String lastName) { this.lastName = lastName; }
+
+    public void setEmail(String email) { this.email = email; }
+
+    public void setAddress(Address address) { this.address = address; }
+
+
+    // toString method(s) for printing/testing
     public String toString() {
         return "Information for Amazon account with ID " + id + ": first name =  " +
                 firstName + "; last name = " + lastName + "; email address = " +
-                email + "; address = " + address.formatToString() + ".";
+                email + "; address = " + address.toString() + ".";
 
     }
 
@@ -73,4 +82,25 @@ public class Account {
         }
     }
 
+
+    // main method for testing
+    // TODO: delete before demo
+    public static void main(String[] args) {
+        Address addr = new Address();
+        addr.setStreet("Linden Avenue");
+        addr.setAptBuilding(703);
+        addr.setCity("Oak Park");
+        addr.setStateProvince("IL");
+        addr.setZipPostal("60302");
+        addr.setCountry("United States");
+
+        Account acct = new Account();
+        acct.setFirstName("Kiley");
+        acct.setLastName("Delaney");
+        acct.setEmail("kdelaney@solstice.com");
+        acct.setAddress(addr);
+
+        System.out.println(acct.toString());
+
+    }
 }
