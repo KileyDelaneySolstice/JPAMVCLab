@@ -1,8 +1,9 @@
 /**
  * Object representing items in an order placed from an Amazon account
- * Holds product, quantity, price, total price (computed within) and shipment
+ * Holds ID, product, quantity, price, total price (computed within), and shipment
  * Product references com.kileydelaney.model.Product object
  * Shipment references com.kileydelaney.model.Shipment object
+ * Many-to-one relationship with Order
  */
 
 
@@ -15,13 +16,17 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 import javax.persistence.*;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-
+@Entity
 public class OrderLine {
+
+    // attribute declarations
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long orderLineId;
 
     @Column(nullable = false)
     private Product product;
@@ -38,8 +43,15 @@ public class OrderLine {
     @Column(nullable = false)
     private Shipment shipment;
 
+    @Column(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "orderNumber")
+    private Order order;
+
 
     // getters
+    public Long getOrderLineId() { return orderLineId; }
+
     public Product getProduct() { return product; }
 
     public Integer getQuantity() { return quantity; }
@@ -50,8 +62,12 @@ public class OrderLine {
 
     public Shipment getShipment() { return shipment; }
 
+    public Order getOrder() { return order; }
+
 
     // setters
+    public void setOrderLineId(Long id) { this.orderLineId = id; }
+
     public void setProduct(Product product) { this.product = product; }
 
     public void setQuantity(Integer quantity) { this.quantity = quantity; }
@@ -61,6 +77,8 @@ public class OrderLine {
     public void setTotalPrice(Double price) { this.price = price; }
 
     public void setShipment(Shipment shipment) { this.shipment = shipment; }
+
+    public void setOrder(Order order) { this.order = order; }
 
 
     // toString method(s) for printing/testing

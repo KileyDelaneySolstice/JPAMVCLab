@@ -20,13 +20,13 @@ import java.util.Arrays;
 
 
 @Entity
-@Table(name = "amazon")
+@Table(name = "accounts")
 public class Account {
 
     // attribute declarations
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long accountId;
 
     @Column(nullable = false)
     private String firstName;
@@ -38,11 +38,15 @@ public class Account {
     private String email;
 
     @Column(nullable = false)
-    private Address address;
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Address> addresses;
 
 
     // getters
-    public Long getId() { return id; }
+    public Long getAccountId() { return accountId; }
 
     public String getFirstName() { return firstName; }
 
@@ -50,23 +54,37 @@ public class Account {
 
     public String getEmail() { return email; }
 
-    public Address getAddress() { return address; }
+    public List<Address> getAddresses() { return addresses; }
 
     // setters
+    public void setAccountId(Long id) { this.accountId = id; }
+
     public void setFirstName(String firstName) { this.firstName = firstName; }
 
     public void setLastName(String lastName) { this.lastName = lastName; }
 
     public void setEmail(String email) { this.email = email; }
 
-    public void setAddress(Address address) { this.address = address; }
+    public void setAddresses(List<Address> addresses) { this.addresses = addresses; }
+
+    // address list handlers
+    public void addAddress(Address address) {
+        addresses.add(address);
+        address.setAccount(this);
+    }
+
+    public void removeAddress(Address address) {
+        addresses.remove(address);
+        address.setAccount(null);
+    }
+
 
 
     // toString method(s) for printing/testing
     public String toString() {
-        return "Data for Amazon account with ID " + id + ": first name =  " +
+        return "Data for Amazon account with ID " + accountId + ": first name =  " +
                 firstName + "; last name = " + lastName + "; email address = " +
-                email + "; address = " + address.toString();
+                email + "; addresses = " + addresses.toString();
 
     }
 

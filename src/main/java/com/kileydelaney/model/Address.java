@@ -1,6 +1,7 @@
 /**
  * Object representing an address associated with an Amazon account
- * Holds street, apartment/building, city, state/province, zip/postal code, country
+ * Holds ID, street, apartment/building, city, state/province, zip/postal code, country
+ * Also has many-to-one relationship with Account
  */
 
 
@@ -17,10 +18,14 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-
+@Entity
 public class Address {
 
     // attribute declarations
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long addressId;
+
     @Column(nullable = false)
     private String street;
 
@@ -40,8 +45,15 @@ public class Address {
     @Column(nullable = false)
     private String country;
 
+    @Column(nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "accountId")
+    private Account account;
+
 
     // getters
+    public Long getAddressId() { return addressId; }
+
     public String getStreet() { return street; }
 
     public Integer getAptBuilding() { return aptBuilding; }
@@ -60,7 +72,11 @@ public class Address {
 
     public String getCountry() { return country; }
 
+    public Account getAccount() { return account; }
+
     // setters
+    public void setAddressId(Long id) { this.addressId = id; }
+
     public void setStreet(String street) { this.street = street; }
 
     public void setAptBuilding(Integer aptBuilding) { this.aptBuilding = aptBuilding; }
@@ -72,6 +88,8 @@ public class Address {
     public void setZipPostal(String zipPostal) { this.zipPostal = zipPostal; }
 
     public void setCountry(String country) { this.country = country; }
+
+    public void setAccount(Account account) { this.account = account; }
 
 
     // toString method(s) for printing/testing

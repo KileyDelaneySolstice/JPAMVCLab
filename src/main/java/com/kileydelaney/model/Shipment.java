@@ -22,6 +22,8 @@ import java.util.Collections;
 import java.util.List;
 
 
+@Entity
+@Table(name = "shipments")
 public class Shipment {
 
     // attribute declarations
@@ -33,7 +35,7 @@ public class Shipment {
     private Account account;
 
     @Column(nullable = false)
-    private Address shippingAddress = account.getAddress();
+    private Address shippingAddress;
 
     @Column(nullable = false)
     private OrderLine orderLine;
@@ -73,7 +75,7 @@ public class Shipment {
 
     // toString method(s) for printing/testing
     public String toString() {
-        return "Data for Amazon shipment #" + id + " for account ID " + account.getId() + ": shipping address = " +
+        return "Data for Amazon shipment #" + id + " for account ID " + account.getAccountId() + ": shipping address = " +
                 shippingAddress.toString() + ", order line = {" + orderLine.toString() + "}, shipped date = " +
                 shippedDate.toString() + ", delivery date = " + deliveryDate.toString();
     }

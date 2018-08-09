@@ -21,7 +21,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-
+@Entity
+@Table(name = "orders")
 public class Order {
 
     // attribute declarations
@@ -39,7 +40,12 @@ public class Order {
     Address shippingAddress;
 
     @Column(nullable = false)
-    OrderLine orderLine;
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @JoinColumn(name = "orderNumber")
+    List<OrderLine> orderLines;
 
     //TODO: figure out how to compute/set this value
     @Column(nullable = false)
@@ -55,7 +61,7 @@ public class Order {
 
     public Address getShippingAddress() { return shippingAddress; }
 
-    public OrderLine getOrderLine() { return orderLine; }
+    public List<OrderLine> getOrderLines() { return orderLines; }
 
     public Double getTotalPrice() { return this.totalPrice; }
 
@@ -69,14 +75,25 @@ public class Order {
 
     public void setShippingAddress(Address shippingAddress) { this.shippingAddress = shippingAddress; }
 
-    public void setOrderLine(OrderLine orderLine) { this.orderLine = orderLine; }
+    public void setOrderLine(List<OrderLine> orderLines) { this.orderLines = orderLines; }
 
     public void setTotalPrice(Double totalPrice) { this.totalPrice = totalPrice; }
+
+    // order lines handlers
+    public void addOrderLine(OrderLine ol) {
+        orderLines.add(ol);
+        ol.setOrder(this);
+    }
+
+    public void removeOrderLine(OrderLine ol) {
+        orderLines.remove(ol);
+        ol.setOrder(null);
+    }
 
 
     // toString method(s) for printing/testing
     public String toString() {
-        return "Data for Amazon order #" + orderNumber + " from account ID " + account.getId() + ": order date = " +
+        return "Data for Amazon order #" + orderNumber + " from account ID " + account.getAccountId() + ": order date = " +
                 orderDate + ", shipping address = " + shippingAddress.toString() + ", total price = $" + totalPrice;
     }
 

@@ -17,7 +17,8 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-
+@Entity
+@Table(name = "products")
 public class Product {
 
     // attribute declarations
