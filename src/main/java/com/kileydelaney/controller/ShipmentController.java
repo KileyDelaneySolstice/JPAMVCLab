@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/amazon/shipments")
+@RequestMapping("/amazon")
 public class ShipmentController {
 
     private ShipmentRepository shipRepository;

@@ -18,12 +18,13 @@ import java.util.Collections;
 import java.util.List;
 
 @Entity
+@Table(name = "products")
 public class Product {
 
     // attribute declarations
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long productId;
 
     private String name;
 
@@ -36,7 +37,7 @@ public class Product {
 
 
     // getters
-    public Long getId() { return id; }
+    public Long getId() { return productId; }
 
     public String getName() { return name; }
 
@@ -60,7 +61,7 @@ public class Product {
 
     // toString method(s) for printing/testing
     public String toString() {
-        return "Data for Amazon product #" + id + ": name = " + name +
+        return "Data for Amazon product #" + productId + ": name = " + name +
                 ", description = " + description + ", image = " + image +
                 ", price = $" + price;
     }

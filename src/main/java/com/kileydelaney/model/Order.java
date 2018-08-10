@@ -26,7 +26,9 @@ import java.util.List;
 public class Order {
 
     // attribute declarations
-    Account account;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "accountId")
+    private Account account;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,16 +36,18 @@ public class Order {
 
     Timestamp orderDate;
 
+    @OneToOne(fetch = FetchType.LAZY)
     Address shippingAddress;
 
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-    @JoinColumn(name = "orderNumber")
+//    @JoinColumn(name = "orderNumber")
     List<OrderLine> orderLines;
 
     Double totalPrice;
+
 
 
     // getters

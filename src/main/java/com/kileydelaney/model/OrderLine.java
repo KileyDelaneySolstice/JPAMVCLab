@@ -21,6 +21,7 @@ import java.util.Collections;
 import java.util.List;
 
 @Entity
+@Table(name = "orderLines")
 public class OrderLine {
 
     // attribute declarations
@@ -28,18 +29,21 @@ public class OrderLine {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderLineId;
 
+    @OneToOne(fetch = FetchType.LAZY)
     private Product product;
 
     private Integer quantity;
 
-    private Double price = product.getPrice();
+    private Double price;
 
-    private Double totalPrice = price * quantity;
+    private Double totalPrice;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "shipmentId")
     private Shipment shipment;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "orderNumber")
+//    @JoinColumn(name = "orderNumber")
     private Order order;
 
 

@@ -1,6 +1,6 @@
 /**
  * Object representing an Amazon account
- * Holds auto-generated ID value, first name, last name, email address, and address
+ * Holds auto-generated ID value, first name, last name, email address, and lists of associated addresses and orders
  * Address references com.kileydelaney.model.Address object
  */
 
@@ -23,6 +23,7 @@ import java.util.Arrays;
 
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "accountId")
 @Entity
+@Table(name = "accounts")
 public class Account {
 
     // attribute declarations
@@ -36,11 +37,23 @@ public class Account {
 
     private String email;
 
+    // TODO: should be single object rather than list??
     @OneToMany(
+            targetEntity = Address.class,
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
+    @ElementCollection(targetClass = Address.class)
+//    @JoinColumn(name = "accountId")
     private List<Address> addresses;
+
+    @OneToMany(
+            targetEntity = Order.class,
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @ElementCollection(targetClass = Order.class)
+    private List<Order> orders;
 
 
     // getters
@@ -65,7 +78,7 @@ public class Account {
 
     public void setAddresses(List<Address> addresses) { this.addresses = addresses; }
 
-    // address list handlers
+    // address and order list handlers
     public void addAddress(Address address) {
         addresses.add(address);
         address.setAccount(this);
@@ -76,6 +89,16 @@ public class Account {
         address.setAccount(null);
     }
 
+    public void addOrder(Order order) {
+        orders.add(order);
+        order.setAccount(this);
+    }
+
+    public void removeOrder(Order order) {
+        orders.remove(order);
+        order.setAccount(null);
+    }
+
 
 
     // toString method(s) for printing/testing
@@ -84,6 +107,17 @@ public class Account {
                 firstName + "; last name = " + lastName + "; email address = " +
                 email + "; addresses = " + addresses.toString();
 
+    }
+
+    public static Account parseSingleJSON(String json) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            Account acct = mapper.readValue(json, Account.class);
+            return acct;
+        } catch (IOException e) {
+            System.out.println( "Could not parse JSON: " + e.getMessage());
+            return null;
+        }
     }
 
 

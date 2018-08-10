@@ -21,8 +21,9 @@ import java.util.Collections;
 import java.util.List;
 
 
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "accountId")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "addressId")
 @Entity
+@Table(name = "addresses")
 public class Address {
 
     // attribute declarations
@@ -43,7 +44,7 @@ public class Address {
     private String country;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "accountId")
+//    @JoinColumn(name = "accountId")
     private Account account;
 
 

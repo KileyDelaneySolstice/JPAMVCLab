@@ -23,17 +23,24 @@ import java.util.List;
 
 
 @Entity
+@Table(name = "shipments")
 public class Shipment {
 
     // attribute declarations
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long shipmentId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "accountId")
     private Account account;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "shippingAddressId")
     private Address shippingAddress;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "orderLineId")
     private OrderLine orderLine;
 
     private Timestamp shippedDate;
@@ -42,7 +49,7 @@ public class Shipment {
 
 
     // getters
-    public Long getId() { return id; }
+    public Long getId() { return shipmentId; }
 
     public Account getAccount() { return account; }
 
@@ -69,7 +76,7 @@ public class Shipment {
 
     // toString method(s) for printing/testing
     public String toString() {
-        return "Data for Amazon shipment #" + id + " for account ID " + account.getAccountId() + ": shipping address = " +
+        return "Data for Amazon shipment #" + shipmentId + " for account ID " + account.getAccountId() + ": shipping address = " +
                 shippingAddress.toString() + ", order line = {" + orderLine.toString() + "}, shipped date = " +
                 shippedDate.toString() + ", delivery date = " + deliveryDate.toString();
     }
