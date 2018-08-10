@@ -21,7 +21,7 @@ public class AccountController {
         this.acctRepository = acctRepository;
     }
 
-    // find all orders for an account
+    // get all orders for an account
     @GetMapping("/getOrdersFromAccount/{accountId}")
     public List<Order> getOrders(@PathVariable Long accountId) {
         return acctRepository.findByAccountId(accountId);
@@ -33,7 +33,6 @@ public class AccountController {
         acctRepository.save(account);
         return "Successfully added account ID " + account.getAccountId().toString();
     }
-
 
     // load data from a JSON url
     @GetMapping("/load/{url}")

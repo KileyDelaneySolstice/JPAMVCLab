@@ -32,7 +32,7 @@ public class Shipment {
     private Long shipmentId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "accountId")
+    @JoinColumn(name = "accountId")
     private Account account;
 
     @ManyToOne(fetch = FetchType.LAZY)
