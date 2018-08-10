@@ -25,25 +25,19 @@ public class OrderLine {
 
     // attribute declarations
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderLineId;
 
-    @Column(nullable = false)
     private Product product;
 
-    @Column(nullable = false)
     private Integer quantity;
 
-    @Column(nullable = false)
     private Double price = product.getPrice();
 
-    // can be null as it will be computed later
     private Double totalPrice = price * quantity;
 
-    @Column(nullable = false)
     private Shipment shipment;
 
-    @Column(nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orderNumber")
     private Order order;

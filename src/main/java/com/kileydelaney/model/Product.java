@@ -18,25 +18,20 @@ import java.util.Collections;
 import java.util.List;
 
 @Entity
-@Table(name = "products")
 public class Product {
 
     // attribute declarations
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false)
     private String description;
 
     // using String to hold image URL
-    @Column(nullable = false)
     private String image;
 
-    @Column(nullable = false)
     private Double price;
 
 

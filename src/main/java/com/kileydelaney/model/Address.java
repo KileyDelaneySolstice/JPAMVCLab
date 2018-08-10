@@ -8,6 +8,8 @@
 package com.kileydelaney.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 
@@ -18,34 +20,28 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "accountId")
 @Entity
 public class Address {
 
     // attribute declarations
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long addressId;
 
-    @Column(nullable = false)
     private String street;
 
-    @Column(nullable = false)
     private Integer aptBuilding;
 
-    @Column(nullable = false)
     private String city;
 
-    // can be empty (if not in US/territories)
-    @Column
     private String stateProvince;
 
-    @Column(nullable = false)
     private String zipPostal;
 
-    @Column(nullable = false)
     private String country;
 
-    @Column(nullable = false)
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "accountId")
     private Account account;

@@ -23,27 +23,21 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "shipments")
 public class Shipment {
 
     // attribute declarations
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private Account account;
 
-    @Column(nullable = false)
     private Address shippingAddress;
 
-    @Column(nullable = false)
     private OrderLine orderLine;
 
-    @Column(nullable = false)
     private Timestamp shippedDate;
 
-    @Column(nullable = false)
     private Timestamp deliveryDate;
 
 

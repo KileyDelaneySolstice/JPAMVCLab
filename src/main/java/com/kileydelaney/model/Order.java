@@ -26,20 +26,16 @@ import java.util.List;
 public class Order {
 
     // attribute declarations
-    @Column(nullable = false)
     Account account;
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long orderNumber;
 
-    @Column(nullable = false)
     Timestamp orderDate;
 
-    @Column(nullable = false)
     Address shippingAddress;
 
-    @Column(nullable = false)
     @OneToMany(
             cascade = CascadeType.ALL,
             orphanRemoval = true
@@ -47,8 +43,6 @@ public class Order {
     @JoinColumn(name = "orderNumber")
     List<OrderLine> orderLines;
 
-    //TODO: figure out how to compute/set this value
-    @Column(nullable = false)
     Double totalPrice;
 
 
