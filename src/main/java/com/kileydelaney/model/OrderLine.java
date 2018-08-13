@@ -87,7 +87,7 @@ public class OrderLine {
 
 
     // method to parse input JSON as Account objects
-    public List<OrderLine> parseJSON(URL jsonURL) throws IOException {
+    public static List<OrderLine> parseJSON(URL jsonURL) throws IOException {
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.enable(SerializationFeature.INDENT_OUTPUT);

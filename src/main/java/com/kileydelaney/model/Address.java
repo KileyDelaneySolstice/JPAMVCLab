@@ -101,7 +101,7 @@ public class Address {
 
 
     // method to parse input JSON as Account objects
-    public List<Address> parseJSON(URL jsonURL) throws IOException {
+    public static List<Address> parseJSON(URL jsonURL) throws IOException {
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.enable(SerializationFeature.INDENT_OUTPUT);

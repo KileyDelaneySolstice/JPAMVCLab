@@ -39,7 +39,7 @@ public class Shipment {
     @JoinColumn(name = "shippingAddressId")
     private Address shippingAddress;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "orderLineId")
     private OrderLine orderLine;
 
