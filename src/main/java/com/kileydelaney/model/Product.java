@@ -68,7 +68,7 @@ public class Product {
 
 
     // method to parse input JSON as Account objects
-    public List<Product> parseJSON(URL jsonURL) throws IOException {
+    public static List<Product> parseJSON(URL jsonURL) throws IOException {
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.enable(SerializationFeature.INDENT_OUTPUT);
