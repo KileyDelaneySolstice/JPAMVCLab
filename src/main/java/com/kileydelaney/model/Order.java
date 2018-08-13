@@ -43,7 +43,7 @@ public class Order {
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
-//    @JoinColumn(name = "orderNumber")
+    @JoinColumn(name = "orderNumber")
     List<OrderLine> orderLines;
 
     Double totalPrice;
@@ -97,7 +97,7 @@ public class Order {
 
 
     // method to parse input JSON as Account objects
-    public List<Order> parseJSON(URL jsonURL) throws IOException {
+    public static List<Order> parseJSON(URL jsonURL) throws IOException {
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.enable(SerializationFeature.INDENT_OUTPUT);

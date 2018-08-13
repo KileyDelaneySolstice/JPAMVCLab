@@ -35,16 +35,16 @@ public class Account {
 
     private String lastName;
 
+    @Column(unique = true)
     private String email;
 
-    // TODO: should be single object rather than list??
     @OneToMany(
             targetEntity = Address.class,
             cascade = CascadeType.ALL,
             orphanRemoval = true
     )
     @ElementCollection(targetClass = Address.class)
-//    @JoinColumn(name = "accountId")
+    @JoinColumn(name = "accountId")
     private List<Address> addresses;
 
     @OneToMany(

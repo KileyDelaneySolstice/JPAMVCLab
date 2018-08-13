@@ -39,11 +39,11 @@ public class OrderLine {
     private Double totalPrice;
 
     @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "shipmentId")
+    @JoinColumn(name = "shipmentId")
     private Shipment shipment;
 
     @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "orderNumber")
+    @JoinColumn(name = "orderNumber")
     private Order order;
 
 

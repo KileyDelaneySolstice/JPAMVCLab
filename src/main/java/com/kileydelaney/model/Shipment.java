@@ -36,11 +36,11 @@ public class Shipment {
     private Account account;
 
     @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "shippingAddressId")
+    @JoinColumn(name = "shippingAddressId")
     private Address shippingAddress;
 
     @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "orderLineId")
+    @JoinColumn(name = "orderLineId")
     private OrderLine orderLine;
 
     private Timestamp shippedDate;
@@ -83,7 +83,7 @@ public class Shipment {
 
 
     // method to parse input JSON as Account objects
-    public List<Shipment> parseJSON(URL jsonURL) throws IOException {
+    public static List<Shipment> parseJSON(URL jsonURL) throws IOException {
         try {
             ObjectMapper mapper = new ObjectMapper();
             mapper.enable(SerializationFeature.INDENT_OUTPUT);

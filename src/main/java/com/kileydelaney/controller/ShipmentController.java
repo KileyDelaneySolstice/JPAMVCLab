@@ -1,10 +1,12 @@
 package com.kileydelaney.controller;
 
 import com.kileydelaney.model.Account;
+import com.kileydelaney.model.Order;
 import com.kileydelaney.model.Shipment;
 import com.kileydelaney.repository.ShipmentRepository;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URL;
 import java.util.List;
 
 @RestController
@@ -17,11 +19,34 @@ public class ShipmentController {
         this.shipRepository = shipRepository;
     }
 
-    // add new account
+
+    // load data from a JSON url
+    @GetMapping("/load/{url}")
+    public String saveAccounts(@PathVariable String url) throws Exception {
+        URL jsonURL = new URL(url);
+        List<Shipment> shipList = Shipment.parseJSON(jsonURL);
+        shipRepository.saveAll(shipList);
+        return "Shipments loaded successfully!";
+    }
+
+    // list all shipments
+    @GetMapping("/list")
+    public List<Shipment> getAllShipments() {
+        return (List<Shipment>) shipRepository.findAll();
+    }
+
+    // add new shipment
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(@RequestBody Shipment shipment) {
         shipRepository.save(shipment);
         return "Successfully added shipment ID " + shipment.getId() + " to account ID " + shipment.getAccount().getAccountId().toString();
+    }
+
+    // delete all shipments
+    @GetMapping("/clear")
+    public String clear() {
+        shipRepository.deleteAll();
+        return "All shipments deleted successfully";
     }
 
     // get all shipments for an account and order by delivery date

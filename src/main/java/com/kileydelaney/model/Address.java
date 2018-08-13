@@ -44,7 +44,7 @@ public class Address {
     private String country;
 
     @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "accountId")
+    @JoinColumn(name = "accountId")
     private Account account;
 
 
