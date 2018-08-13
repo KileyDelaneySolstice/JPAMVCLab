@@ -104,22 +104,6 @@ public class Account {
     }
 
 
-    // data retrieval/formatting for order queries
-    public String showAllOrders() {
-        for (Order ord : orders) {
-            //do this
-            return "";
-        }
-    }
-
-    public String showAllOrderData() {
-        for (Order ord : orders) {
-            //do this
-            return "";
-        }
-    }
-
-
     // toString method(s) for printing/testing
     public String toString() {
         return "Data for Amazon account with ID " + accountId + ": first name =  " +

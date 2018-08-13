@@ -36,9 +36,23 @@ public class AccountController {
     }
 
     // get all orders for an account
-    @GetMapping("/getOrdersFromAccount/{accountId}")
+    @GetMapping("/{accountId}/getallorders")
     public List<Order> getOrders(@PathVariable Long accountId) {
-        return acctRepository.findByAccountId(accountId);
+        List<Order> ol = acctRepository.findAllOrders(accountId);
+        for (Order ord : ol) {
+            System.out.println("Order #" + ord.getOrderNumber().toString() + " placed on " + ord.getOrderDate().toString());
+        }
+        return ol;
+    }
+
+    // get all orders with extra data for an account
+    @GetMapping("/{accountId}/getallorderswithdata")
+    public List<Order> getOrdersWithData(@PathVariable Long accountId) {
+        List<Order> ol = acctRepository.findAllOrdersExtended(accountId);
+        for (Order ord : ol) {
+            System.out.println(ord.toString());
+        }
+        return ol;
     }
 
     // find account by last name

@@ -36,6 +36,16 @@ public class ShipmentController {
         return (List<Shipment>) shipRepository.findAll();
     }
 
+    // get all shipments for an account, ordered by delivery date
+    @GetMapping("/{accountId}/getallshipments")
+    public List<Shipment> getAllShipmentsFromAccount(@PathVariable Long accountId) {
+        List<Shipment> shipList = shipRepository.findAllByAccountIdOrderByDeliveryDate(accountId);
+        for (Shipment s : shipList) {
+            System.out.println(s.toString());
+        }
+        return shipList;
+    }
+
     // add new shipment
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(@RequestBody Shipment shipment) {

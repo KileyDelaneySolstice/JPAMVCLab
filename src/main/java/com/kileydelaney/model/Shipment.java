@@ -77,8 +77,8 @@ public class Shipment {
     // toString method(s) for printing/testing
     public String toString() {
         return "Data for Amazon shipment #" + shipmentId + " for account ID " + account.getAccountId() + ": shipping address = " +
-                shippingAddress.toString() + ", order line = {" + orderLine.toString() + "}, shipped date = " +
-                shippedDate.toString() + ", delivery date = " + deliveryDate.toString();
+                shippingAddress.toString() + ", order number = " + orderLine.getOrder().getOrderNumber().toString() + ", order line = {"
+                + orderLine.toString() + "}, shipped date = " + shippedDate.toString() + ", delivery date = " + deliveryDate.toString();
     }
 
 
