@@ -11,9 +11,13 @@ import java.util.List;
 @Repository
 public interface AccountRepository extends CrudRepository<Account, Long> {
 
-    // get order details for an account
-    @Query(value = "SELECT * FROM orders WHERE accountId = :accountId", nativeQuery = true)
-    List<Order> findByAccountId(@Param("accountId") Long accountId);
+    // get all orders from an account, ordered by order date
+    @Query(value = "SELECT orders FROM accounts WHERE accountId = :accountId", nativeQuery = true)
+    List<Order> findAllOrders(@Param("accountId") Long accountId);
+
+    // get details for all orders from an account
+    @Query(value = "SELECT orders FROM accounts WHERE accountId = :accountId SORT BY ", nativeQuery = true)
+    List<Order> findAllOrders(@Param("accountId") Long accountId);
 
     // list accounts with given last name
     List<Account> findByLastName(String lastName);

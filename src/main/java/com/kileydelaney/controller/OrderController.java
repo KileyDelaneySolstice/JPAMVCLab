@@ -1,7 +1,11 @@
 package com.kileydelaney.controller;
 
+import com.kileydelaney.model.Account;
+import com.kileydelaney.model.Address;
 import com.kileydelaney.model.Order;
+import com.kileydelaney.model.OrderLine;
 import com.kileydelaney.repository.OrderRepository;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URL;
@@ -37,7 +41,13 @@ public class OrderController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(@RequestBody Order order) {
         orderRepository.save(order);
-        return "Successfully added order #" + order.getOrderNumber() + " to account ID " + order.getAccount().getAccountId().toString();
+        Account acct = order.getAccount();
+        acct.getOrders().add(order);
+        List<OrderLine> ol = order.getOrderLines();
+        for (OrderLine o : ol) {
+            o.setOrder(order);
+        }
+        return "Successfully added order #" + order.getOrderNumber() + " to account ID " + acct.getAccountId().toString();
     }
 
     // delete all orders

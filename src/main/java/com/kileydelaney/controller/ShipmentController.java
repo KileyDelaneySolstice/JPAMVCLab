@@ -2,6 +2,7 @@ package com.kileydelaney.controller;
 
 import com.kileydelaney.model.Account;
 import com.kileydelaney.model.Order;
+import com.kileydelaney.model.OrderLine;
 import com.kileydelaney.model.Shipment;
 import com.kileydelaney.repository.ShipmentRepository;
 import org.springframework.web.bind.annotation.*;
@@ -39,7 +40,10 @@ public class ShipmentController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     public String add(@RequestBody Shipment shipment) {
         shipRepository.save(shipment);
-        return "Successfully added shipment ID " + shipment.getId() + " to account ID " + shipment.getAccount().getAccountId().toString();
+        Account acct = shipment.getAccount();
+        OrderLine ol = shipment.getOrderLine();
+        ol.setShipment(shipment);
+        return "Successfully added shipment ID " + shipment.getId() + " to account ID " + acct.getAccountId().toString();
     }
 
     // delete all shipments

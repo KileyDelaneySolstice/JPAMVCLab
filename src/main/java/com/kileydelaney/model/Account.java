@@ -67,6 +67,8 @@ public class Account {
 
     public List<Address> getAddresses() { return addresses; }
 
+    public List<Order> getOrders() { return orders; }
+
     // setters
     public void setAccountId(Long id) { this.accountId = id; }
 
@@ -77,6 +79,8 @@ public class Account {
     public void setEmail(String email) { this.email = email; }
 
     public void setAddresses(List<Address> addresses) { this.addresses = addresses; }
+
+    public void setOrders(List<Order> orders) { this.orders = orders; }
 
     // address and order list handlers
     public void addAddress(Address address) {
@@ -99,6 +103,21 @@ public class Account {
         order.setAccount(null);
     }
 
+
+    // data retrieval/formatting for order queries
+    public String showAllOrders() {
+        for (Order ord : orders) {
+            //do this
+            return "";
+        }
+    }
+
+    public String showAllOrderData() {
+        for (Order ord : orders) {
+            //do this
+            return "";
+        }
+    }
 
 
     // toString method(s) for printing/testing

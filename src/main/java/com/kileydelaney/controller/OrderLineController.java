@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.*;
 import java.net.URL;
 import java.util.List;
 
+@RestController
+@RequestMapping("/amazon/orderline")
 public class OrderLineController {
 
     private OrderLineRepository olRepository;

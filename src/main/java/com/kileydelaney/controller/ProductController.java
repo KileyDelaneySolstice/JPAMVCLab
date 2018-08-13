@@ -9,7 +9,7 @@ import java.net.URL;
 import java.util.List;
 
 @RestController
-@RequestMapping("/amazon")
+@RequestMapping("/amazon/product")
 public class ProductController {
 
     private ProductRepository prodRepository;
